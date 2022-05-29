@@ -14,7 +14,8 @@ class ChampionPicker extends Component {
 	handleNameChange = ({ currentTarget: input }) => {
 		console.log("Name Change", input.name);
 		const players = [...this.state.players];
-		players[input.name - 1].name = input.value;
+		const player = players.find((x) => x.id == input.name);
+		player.name = input.value;
 		this.setState({ players });
 	};
 

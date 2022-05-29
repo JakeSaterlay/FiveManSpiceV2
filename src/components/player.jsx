@@ -7,7 +7,7 @@ const Player = (props) => {
 				<div className="border-b border-white-800 py-2">
 					<input
 						placeholder={"Player " + props.player.id}
-						className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+						className="appearance-none bg-transparent border-none w-full text-neutral-50 mr-3 py-1 px-2 leading-tight focus:outline-none"
 						name={props.id}
 						onChange={props.onChange}
 						type="text"
