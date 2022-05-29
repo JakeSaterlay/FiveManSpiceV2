@@ -29,7 +29,8 @@ class ChampionPicker extends Component {
 	render() {
 		const { players } = this.state;
 		return (
-			<div>
+			<div class="container mx-auto">
+				<h1 className="text-3xl font-bold underline">Welcome</h1>
 				{players.map((player) => (
 					<Player
 						id={player.id}
