@@ -1,5 +1,3 @@
-const roles = ["top", "mid", "jungler", "adc", "support"];
-
 const champions = [
 	"Aatrox",
 	"Ahri",
@@ -160,4 +158,4 @@ const champions = [
 	"Zoe",
 	"Zyra",
 ];
-export { roles, champions };
+export { champions };
