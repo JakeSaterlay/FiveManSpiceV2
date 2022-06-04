@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import Player from "./player";
+import PlayerResult from "./playerResult";
+import { roles, champions } from "../constants/constants";
 class ChampionPicker extends Component {
 	state = {
 		players: [
-			{ id: 1, name: "", role: "", champion: "" },
-			{ id: 2, name: "", role: "", champion: "" },
-			{ id: 3, name: "", role: "", champion: "" },
-			{ id: 4, name: "", role: "", champion: "" },
-			{ id: 5, name: "", role: "", champion: "" },
+			{ id: 1, name: "", role: "", champion: "", submitted: false },
+			{ id: 2, name: "", role: "", champion: "", submitted: false },
+			{ id: 3, name: "", role: "", champion: "", submitted: false },
+			{ id: 4, name: "", role: "", champion: "", submitted: false },
+			{ id: 5, name: "", role: "", champion: "", submitted: false },
 		],
+		submitCount: 0,
 	};
 
 	handleNameChange = ({ currentTarget: input }) => {
@@ -19,12 +22,27 @@ class ChampionPicker extends Component {
 		this.setState({ players });
 	};
 
-	handleChampSelect = (player) => {
-		console.log("Champ Select", player.id);
-	};
+	handlePlayerSubmit = (player) => {
+		console.log("Player Submitted", player.id);
+		const players = [...this.state.players];
+		const submittedPlayer = players.find((x) => x.id == player.id);
 
-	handleRoleSelect = (player) => {
-		console.log("Role Select", player.id);
+		// get random champion and splice
+		var randomChampion =
+			champions[Math.floor(Math.random() * champions.length)];
+		var index = champions.indexOf(randomChampion);
+		champions.splice(index, 1);
+
+		// get random role and splice
+		var randomRole = roles[Math.floor(Math.random() * roles.length)];
+		var index = roles.indexOf(randomRole);
+		roles.splice(index, 1);
+
+		submittedPlayer.champion = randomChampion;
+		submittedPlayer.role = randomRole;
+		submittedPlayer.submitted = true;
+
+		this.setState({ players, submitCount: this.state.submitCount + 1 });
 	};
 
 	render() {
@@ -38,10 +56,11 @@ class ChampionPicker extends Component {
 						name={player.id}
 						player={player}
 						onChange={this.handleNameChange}
-						onChampSelect={this.handleChampSelect}
-						onRoleSelect={this.handleRoleSelect}
+						onPlayerSubmit={this.handlePlayerSubmit}
 					/>
 				))}
+				{this.state.submitCount === 5 &&
+					players.map((player) => <PlayerResult player={player} />)}
 			</div>
 		);
 	}
