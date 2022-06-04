@@ -45,6 +45,18 @@ class ChampionPicker extends Component {
 		this.setState({ players, submitCount: this.state.submitCount + 1 });
 	};
 
+	handleReshuffle = (player) => {
+		const players = [...this.state.players];
+		const submittedPlayer = players.find((x) => x.id == player.id);
+		// get random champion and splice
+		var randomChampion =
+			champions[Math.floor(Math.random() * champions.length)];
+		var index = champions.indexOf(randomChampion);
+		champions.splice(index, 1);
+		submittedPlayer.champion = randomChampion;
+		this.setState({ players });
+	};
+
 	render() {
 		const { players } = this.state;
 		return (
@@ -60,7 +72,9 @@ class ChampionPicker extends Component {
 					/>
 				))}
 				{this.state.submitCount === 5 &&
-					players.map((player) => <PlayerResult player={player} />)}
+					players.map((player) => (
+						<PlayerResult onReshuffle={this.handleReshuffle} player={player} />
+					))}
 			</div>
 		);
 	}
