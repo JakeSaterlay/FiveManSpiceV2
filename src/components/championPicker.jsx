@@ -191,6 +191,7 @@ class ChampionPicker extends Component {
 	};
 
 	handleReshuffle = (player) => {
+		console.log("Hello");
 		const players = [...this.state.players];
 		const submittedPlayer = players.find((x) => x.id == player.id);
 		// get random champion and splice
