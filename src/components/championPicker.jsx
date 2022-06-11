@@ -183,7 +183,6 @@ class ChampionPicker extends Component {
 	}
 
 	handleNameChange = ({ currentTarget: input }) => {
-		console.log("Name Change", input.name);
 		const players = [...this.state.players];
 		const player = players.find((x) => x.id == input.name);
 		player.name = input.value;
@@ -191,7 +190,6 @@ class ChampionPicker extends Component {
 	};
 
 	handleReshuffle = (player) => {
-		console.log("Hello");
 		const players = [...this.state.players];
 		const submittedPlayer = players.find((x) => x.id == player.id);
 		// get random champion and splice
@@ -212,10 +210,11 @@ class ChampionPicker extends Component {
 			var index = champions.indexOf(randomChampion);
 			champions.splice(index, 1);
 
-			// get random role and splice
+			// if no roles, reset the array
 			if (roles.length === 0) {
 				roles = originalRoles;
 			}
+
 			var randomRole = roles[Math.floor(Math.random() * roles.length)];
 			var index = roles.indexOf(randomRole);
 			roles.splice(index, 1);
@@ -227,8 +226,9 @@ class ChampionPicker extends Component {
 
 	render() {
 		const { players } = this.state;
+		const display = this.props.showSection ? "none" : "";
 		return (
-			<div className="flex flex-col items-center bg-slate-800 h-screen w-screen">
+			<div style={{ display: display }}>
 				{this.state.submitted === false &&
 					players.map((player) => (
 						<Player
