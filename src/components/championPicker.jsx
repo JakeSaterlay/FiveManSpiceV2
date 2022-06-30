@@ -199,6 +199,11 @@ class ChampionPicker extends Component {
 		champions.splice(index, 1);
 		submittedPlayer.champion = randomChampion;
 		this.setState({ players });
+
+		//perhaps a better way to do it? This way creates a clone of the array index as to not modify directly?
+		// const index = players.indexOf(player);
+		// players[index] = {...players[index]};
+		// players[index].champion = randomChampion;
 	};
 
 	handleSubmitAll = () => {
